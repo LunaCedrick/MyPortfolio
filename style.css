@@ -257,6 +257,39 @@ ul {
   place-items: end center;
 }
 
+/* Hero-only atmosphere that blends the portrait into the dark environment. */
+.hero__visual::before {
+  content: "";
+  position: absolute;
+  right: -18%;
+  bottom: 0;
+  z-index: 0;
+  width: min(78vw, 620px);
+  height: min(82vw, 620px);
+  background:
+    radial-gradient(circle at 54% 42%, rgb(var(--color-accent-rgb) / 0.15), transparent 34%),
+    radial-gradient(circle at 48% 62%, rgb(var(--color-accent-dark-rgb) / 0.2), transparent 58%);
+  filter: blur(28px);
+  opacity: 0.72;
+  pointer-events: none;
+}
+
+.hero__visual::after {
+  content: "";
+  position: absolute;
+  right: -16%;
+  bottom: -8%;
+  z-index: 3;
+  width: min(80vw, 560px);
+  height: min(42vw, 320px);
+  background:
+    radial-gradient(ellipse at 56% 62%, rgb(var(--color-bg-rgb) / 0.86), transparent 68%),
+    linear-gradient(0deg, rgb(var(--color-bg-rgb) / 0.82), transparent 70%);
+  filter: blur(18px);
+  opacity: 0.82;
+  pointer-events: none;
+}
+
 .hero__photo-wrap {
   position: relative;
   z-index: 2;
@@ -264,18 +297,48 @@ ul {
   isolation: isolate;
 }
 
+/* Crimson depth layer behind the hero portrait only. */
 .hero__photo-wrap::before {
   content: "";
   position: absolute;
-  inset: 12% -12% 2% 8%;
+  inset: 8% -18% 0 2%;
   z-index: -1;
-  background: linear-gradient(145deg, rgb(var(--color-accent-dark-rgb) / 0.86), rgb(var(--color-accent-rgb) / 0.12));
+  background:
+    radial-gradient(circle at 58% 38%, rgb(var(--color-accent-rgb) / 0.12), transparent 34%),
+    linear-gradient(145deg, rgb(var(--color-accent-dark-rgb) / 0.66), rgb(var(--color-accent-rgb) / 0.08));
   clip-path: polygon(30% 0, 100% 8%, 76% 100%, 0 92%);
+  filter: blur(2px);
+}
+
+/* Soft edge and bottom haze so the hero portrait does not feel pasted on. */
+.hero__photo-wrap::after {
+  content: "";
+  position: absolute;
+  inset: 10% -8% 0 -8%;
+  z-index: 3;
+  background:
+    linear-gradient(90deg, rgb(var(--color-bg-rgb) / 0.42), transparent 18%, transparent 78%, rgb(var(--color-bg-rgb) / 0.34)),
+    linear-gradient(0deg, rgb(var(--color-bg-rgb) / 0.88), transparent 34%);
+  opacity: 0.52;
+  pointer-events: none;
 }
 
 .hero__photo {
   width: 100%;
-  filter: drop-shadow(0 34px 42px rgb(var(--color-bg-rgb) / 0.62));
+  filter:
+    brightness(0.94)
+    contrast(1.07)
+    saturate(0.94)
+    drop-shadow(0 34px 42px rgb(var(--color-bg-rgb) / 0.7))
+    drop-shadow(0 0 34px rgb(var(--color-accent-dark-rgb) / 0.22));
+  -webkit-mask-image:
+    linear-gradient(90deg, transparent 0%, #000 8%, #000 92%, transparent 100%),
+    linear-gradient(180deg, #000 0%, #000 72%, transparent 100%);
+  -webkit-mask-composite: source-in;
+  mask-image:
+    linear-gradient(90deg, transparent 0%, #000 8%, #000 92%, transparent 100%),
+    linear-gradient(180deg, #000 0%, #000 72%, transparent 100%);
+  mask-composite: intersect;
 }
 
 .hero__code {
@@ -1096,6 +1159,14 @@ body.is-modal-open {
     align-self: end;
   }
 
+  .hero__visual::before {
+    opacity: 0.84;
+  }
+
+  .hero__photo-wrap::after {
+    opacity: 0.58;
+  }
+
   .hero__code {
     top: 18%;
     right: -18px;
@@ -1195,6 +1266,13 @@ body.is-modal-open {
 
   .hero__photo-wrap {
     width: min(33vw, 445px);
+  }
+
+  .hero__visual::before {
+    right: -24%;
+    bottom: -4%;
+    width: min(58vw, 680px);
+    height: min(58vw, 680px);
   }
 
   .hero__stats {
