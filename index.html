@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Cedrick Luna, an aspiring software engineer, building practical solutions through code, design, and continuous learning.">
+  <title>Cedrick Luna | Aspiring Software Engineer</title>
+
+  <!-- Google Fonts for the portfolio typography. -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Main stylesheet. -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Fixed navigation for moving through the portfolio sections. -->
+  <header class="site-header">
+    <nav class="site-nav" aria-label="Primary navigation">
+      <a class="site-nav__logo" href="#home" aria-label="Cedrick Luna home">&lt;/&gt;</a>
+
+      <!-- CSS-only mobile menu control. -->
+      <input class="site-nav__toggle" type="checkbox" id="nav-toggle" aria-label="Toggle navigation menu">
+      <label class="site-nav__menu-button" for="nav-toggle" aria-hidden="true">
+        <span></span>
+        <span></span>
+        <span></span>
+      </label>
+
+      <ul class="site-nav__links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <!-- Hero section: first impression and strongest visual statement. -->
+    <section class="hero" id="home" aria-labelledby="hero-title">
+      <div class="hero__overlay" aria-hidden="true"></div>
+
+      <div class="hero__inner">
+        <!-- Main hero message. -->
+        <div class="hero__content">
+          <p class="hero__label">Software Engineering</p>
+
+          <h1 class="hero__title" id="hero-title">
+            <span>Building</span>
+            <span>Solutions.</span>
+          </h1>
+
+          <p class="hero__subtitle">Code. Design. Innovate.</p>
+          <span class="hero__divider" aria-hidden="true"></span>
+        </div>
+
+        <!-- Profile photo and decorative code background. -->
+        <div class="hero__visual">
+          <pre class="hero__code" aria-hidden="true"><code>function createImpact() {
+  let passion = true;
+  let mindset = "growth";
+
+  while (passion) {
+    learn();
+    build();
+    innovate();
+    impact();
+  }
+
+  return success;
+}</code></pre>
+
+          <div class="hero__photo-wrap">
+            <img class="hero__photo" src="assets/images/profile-picture.png" alt="Cedrick Luna professional portrait">
+          </div>
+        </div>
+
+        <!-- Bottom-left capability row. -->
+        <ul class="hero__stats" aria-label="Core strengths">
+          <li>
+            <span>&lt;/&gt;</span>
+            <strong>Development</strong>
+          </li>
+          <li>
+            <span>▦</span>
+            <strong>Design</strong>
+          </li>
+          <li>
+            <span>✦</span>
+            <strong>Innovation</strong>
+          </li>
+          <li>
+            <span>↗</span>
+            <strong>Growth</strong>
+          </li>
+        </ul>
+
+        <!-- Bottom-right personal tagline. -->
+        <p class="hero__tagline">
+          <span>Stay Curious.</span>
+          <span>Keep Building.</span>
+        </p>
+      </div>
+    </section>
+
+    <!-- About section: personal story, skills, and professional direction. -->
+    <section class="about" id="about" aria-labelledby="about-title">
+      <div class="about__inner">
+        <!-- Section heading keeps the same bold portfolio language. -->
+        <div class="about__header">
+          <p class="about__subtitle">Who I Am</p>
+          <h2 class="about__title" id="about-title">About</h2>
+        </div>
+
+        <div class="about__grid">
+          <!-- Left column: profile image and quick social links. -->
+          <div class="about__media">
+            <div class="about__photo-frame">
+              <img class="about__photo" src="assets/images/profile-picture.png" alt="Cedrick Luna professional portrait">
+            </div>
+
+            <ul class="about__socials" aria-label="Cedrick Luna social links">
+              <li>
+                <a href="https://www.linkedin.com/in/cedrick-luna-9236b8393/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn profile">in</a>
+              </li>
+              <li>
+                <a href="https://www.facebook.com/cedrick.luna.50" target="_blank" rel="noopener noreferrer" aria-label="Facebook profile">fb</a>
+              </li>
+              <li>
+                <a href="https://x.com/lunaced_" target="_blank" rel="noopener noreferrer" aria-label="X profile">x</a>
+              </li>
+              <li>
+                <a href="https://github.com/LunaCedrick/" target="_blank" rel="noopener noreferrer" aria-label="GitHub profile">gh</a>
+              </li>
+              <li>
+                <a href="mailto:cedrick.luna.work@gmail.com" aria-label="Email Cedrick Luna">@</a>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Right column: name, bio, skill tags, and personality statements. -->
+          <div class="about__content">
+            <div class="about__name-block">
+              <h3 class="about__name">Cedrick Masalunga Luna</h3>
+              <p class="about__role">Aspiring Software Engineer</p>
+            </div>
+
+            <p class="about__bio">
+              I'm Cedrick, a fresh Computer Engineering graduate with a genuine passion for software and cloud engineering. I don't just study this &mdash; I love it. I'm the kind of person who learns fast, builds faster, and is always hungry to grow. Currently seeking my first role where I can contribute, level up, and prove that potential backed by dedication beats experience every time.
+            </p>
+
+            <div class="about__skills">
+              <h4 class="about__block-label">Technical Skills</h4>
+              <ul class="about__skill-list" aria-label="Technical skills">
+                <li>Python</li>
+                <li>HTML</li>
+                <li>CSS</li>
+                <li>JavaScript</li>
+                <li>Git</li>
+                <li>GitHub</li>
+                <li>Cloud Basics</li>
+                <li>Problem Solving</li>
+              </ul>
+            </div>
+
+            <div class="about__drivers">
+              <h4 class="about__block-label">What Drives Me</h4>
+              <ul class="about__driver-list">
+                <li>Fast learner who thrives under pressure.</li>
+                <li>Passionate about building real solutions.</li>
+                <li>Cloud and software engineering is not just a career &mdash; it's a calling.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
