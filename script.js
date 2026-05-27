@@ -30,6 +30,8 @@ const projects = [
 ];
 
 // Modal elements used by the project card interactions.
+const navToggle = document.querySelector("#nav-toggle");
+const navLinks = document.querySelectorAll(".site-nav__links a");
 const projectCards = document.querySelectorAll(".project-card");
 const projectModal = document.querySelector("#project-modal");
 const modalTitle = document.querySelector("#project-modal-title");
@@ -52,6 +54,15 @@ function createListItem(text) {
   item.textContent = text;
   return item;
 }
+
+// Closes the mobile navigation after a section link is selected.
+navLinks.forEach((link) => {
+  link.addEventListener("click", () => {
+    if (navToggle) {
+      navToggle.checked = false;
+    }
+  });
+});
 
 // Fills the modal with the project that matches the selected card.
 function populateProjectModal(project) {

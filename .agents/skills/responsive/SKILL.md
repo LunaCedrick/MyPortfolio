@@ -1,8 +1,6 @@
 ---
 name: responsive
-description: Full responsive audit after all sections
-are built. Ensures the portfolio works perfectly on
-all screen sizes before deployment.
+description: Ensures the portfolio is fully responsive and works seamlessly across all screen sizes, from mobile to desktop.
 ---
 
 ## Goal
