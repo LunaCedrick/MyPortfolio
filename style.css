@@ -250,6 +250,31 @@ ul {
   background: var(--color-accent);
 }
 
+.hero__resume-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 46px;
+  margin-top: 28px;
+  border: 1px solid var(--color-accent);
+  padding: 0 18px;
+  color: var(--color-accent);
+  font-size: 0.72rem;
+  font-weight: 900;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+
+.hero__resume-button:hover,
+.hero__resume-button:focus-visible {
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+  color: var(--color-text);
+  outline: none;
+  transform: translateY(-3px);
+}
+
 .hero__visual {
   position: relative;
   display: grid;

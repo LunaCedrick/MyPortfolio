@@ -32,6 +32,11 @@ Professional photo as the centerpiece.
 - Subtext below headline: "CODE. DESIGN. INNOVATE."
   Style: spaced caps, muted #aaaaaa, small size, letter-spacing 0.3em
 - Horizontal red line divider (width: 60px, height: 3px)
+- Resume CTA below divider:
+  Text: "DOWNLOAD RESUME"
+  Link: assets/myResume.pdf
+  Style: outlined crimson red button, uppercase spaced caps, compact and recruiter-friendly
+  Behavior: opens the resume in a new tab and offers it as a downloadable PDF
 
 ## Icon Stats Row (bottom left)
 Four items in a row, separated by subtle dividers:
