@@ -11,13 +11,20 @@ Each card opens a modal with project details.
 ## Layout
 - Section title: "PROJECTS" — Bebas Neue, white, uppercase
 - Subtitle: "THINGS I'VE BUILT" — spaced caps, muted #aaaaaa
-- 3 cards in a row (desktop), 1 column (mobile)
+- Cards sit inside a horizontal scrollable carousel
+- On desktop: show 3 cards with a hint of the next card when more projects are added
+- On mobile: show 1 full card with a hint of the next card
+- Hide the scrollbar visually while preserving scroll and swipe behavior
+- Add subtle left/right arrow buttons for desktop users only
+- Arrow buttons use Font Awesome chevrons, crimson red #c0392b, dark background, and 0.2s ease hover
 - Each card is clickable — opens a modal overlay
 
 ## Project Card Design
 - Background: #1a0a0a
 - Border: 1px solid #1a1a1a
 - Hover: border color transitions to #c0392b, subtle red glow
+- Cards must keep their existing visuals inside the carousel
+- Cards use a fixed min-width and flex-shrink: 0 so they do not compress
 - Top: project thumbnail area (dark placeholder if no image)
 - Middle: project name in white bold, tech stack tags in crimson red
 - Bottom: "VIEW PROJECT →" label in crimson red spaced caps
@@ -36,6 +43,7 @@ Each card has:
 - Close button: X top right, white, hover red
 - Modal content:
   - Project name: Bebas Neue, large, white
+  - Created date: small muted line below title and above overview, populated from JavaScript data
   - Overview paragraph: Inter, #aaaaaa
   - Features list: bullet points, crimson red bullets
   - Tech stack tags: small pill tags, #c0392b background
@@ -48,6 +56,7 @@ Each card has:
 Project 1:
   Name: "PROJECT ONE"
   Description: "A short description of what this project does."
+  Date: "May 2026"
   Features: ["Feature one", "Feature two", "Feature three"]
   Tech: ["HTML", "CSS", "JavaScript"]
   Live Link: "#"
@@ -56,6 +65,7 @@ Project 1:
 Project 2:
   Name: "PROJECT TWO"
   Description: "A short description of what this project does."
+  Date: "May 2026"
   Features: ["Feature one", "Feature two", "Feature three"]
   Tech: ["Python", "HTML", "CSS"]
   Live Link: "#"
@@ -64,6 +74,7 @@ Project 2:
 Project 3:
   Name: "PROJECT THREE"
   Description: "A short description of what this project does."
+  Date: "May 2026"
   Features: ["Feature one", "Feature two", "Feature three"]
   Tech: ["HTML", "CSS", "JavaScript"]
   Live Link: "#"
@@ -74,6 +85,11 @@ Project 3:
 - Add event listener on each card
 - Close on backdrop click and X button
 - Trap focus inside modal for accessibility
+- Add vanilla JS for project carousel arrow scrolling
+- Use a projects track with id="projects-track"
+- Scroll amount should match one card width plus the carousel gap
+- Add date to each project data object in "Month Year" format
+- Show the modal date field only when a project has a date; keep it hidden if no date exists
 
 ## What to Ask Codex
 "Using my agents.md and skill-projects.md, build the 

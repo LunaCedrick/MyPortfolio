@@ -18,6 +18,7 @@ Three cards side by side:
 
 Card 1 — Email
 - Icon: envelope icon, crimson red
+- Font Awesome icon: fa-solid fa-envelope
 - Label: "EMAIL" — spaced caps, #aaaaaa
 - Value: "cedrick.luna.work@gmail.com" — white
 - Click: opens mailto link
@@ -25,6 +26,7 @@ Card 1 — Email
 
 Card 2 — LinkedIn
 - Icon: LinkedIn icon, crimson red
+- Font Awesome icon: fa-brands fa-linkedin-in
 - Label: "LINKEDIN" — spaced caps, #aaaaaa
 - Value: "cedrick-luna-9236b8393" — white
 - Click: opens https://www.linkedin.com/in/cedrick-luna-9236b8393/
@@ -32,8 +34,9 @@ Card 2 — LinkedIn
 
 Card 3 — Location
 - Icon: location pin icon, crimson red
+- Font Awesome icon: fa-solid fa-location-dot
 - Label: "BASED IN" — spaced caps, #aaaaaa
-- Value: "Philippines" — white
+- Value: "Quezon, Philippines" — white
 - No link needed
 
 ## Card Styling
@@ -68,8 +71,15 @@ Below the cards, centered:
 - LinkedIn → https://www.linkedin.com/in/cedrick-luna-9236b8393/
 - Facebook → https://www.facebook.com/cedrick.luna.50
 - X/Twitter → https://x.com/lunaced_
-- GitHub → placeholder
+- GitHub → https://github.com/LunaCedrick/
 - Style: #aaaaaa default, hover #c0392b, 0.2s transition
+- Use Font Awesome icons instead of text placeholders:
+  LinkedIn: fa-brands fa-linkedin-in
+  Facebook: fa-brands fa-facebook-f
+  X/Twitter: fa-brands fa-x-twitter
+  GitHub: fa-brands fa-github
+- Do NOT add email to the footer social row.
+- Keep aria-label on each link and put aria-hidden="true" on each decorative <i> icon.
 
 ## CSS Notes
 - Contact section background: #0d0d0d
@@ -77,7 +87,8 @@ Below the cards, centered:
 - CTA block max-width 600px centered
 - Footer padding: 30px 0
 - All links open in new tab (target="_blank")
-- Use Font Awesome or inline SVG for icons
+- Use Font Awesome for social and contact icons
+- Font Awesome must be loaded in the document head before style.css
 
 ## What to Ask Codex
 "Using my agents.md and skill-contact.md, build the Contact

@@ -11,6 +11,12 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
+  <!-- Font Awesome icon library for social and UI icons. -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <!-- Favicon displayed in the browser tab. -->
+  <link rel="icon" type="image/png" href="assets/images/favicon/favicon-32x32.png">
+
   <!-- Main stylesheet. -->
   <link rel="stylesheet" href="style.css">
 </head>
@@ -127,19 +133,29 @@
 
             <ul class="about__socials" aria-label="Cedrick Luna social links">
               <li>
-                <a href="https://www.linkedin.com/in/cedrick-luna-9236b8393/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn profile">in</a>
+                <a href="https://www.linkedin.com/in/cedrick-luna-9236b8393/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn profile">
+                  <i class="fa-brands fa-linkedin-in" aria-hidden="true"></i>
+                </a>
               </li>
               <li>
-                <a href="https://www.facebook.com/cedrick.luna.50" target="_blank" rel="noopener noreferrer" aria-label="Facebook profile">fb</a>
+                <a href="https://www.facebook.com/cedrick.luna.50" target="_blank" rel="noopener noreferrer" aria-label="Facebook profile">
+                  <i class="fa-brands fa-facebook-f" aria-hidden="true"></i>
+                </a>
               </li>
               <li>
-                <a href="https://x.com/lunaced_" target="_blank" rel="noopener noreferrer" aria-label="X profile">x</a>
+                <a href="https://x.com/lunaced_" target="_blank" rel="noopener noreferrer" aria-label="X profile">
+                  <i class="fa-brands fa-x-twitter" aria-hidden="true"></i>
+                </a>
               </li>
               <li>
-                <a href="https://github.com/LunaCedrick/" target="_blank" rel="noopener noreferrer" aria-label="GitHub profile">gh</a>
+                <a href="https://github.com/LunaCedrick/" target="_blank" rel="noopener noreferrer" aria-label="GitHub profile">
+                  <i class="fa-brands fa-github" aria-hidden="true"></i>
+                </a>
               </li>
               <li>
-                <a href="mailto:cedrick.luna.work@gmail.com" aria-label="Email Cedrick Luna">@</a>
+                <a href="mailto:cedrick.luna.work@gmail.com" aria-label="Email Cedrick Luna">
+                  <i class="fa-solid fa-envelope" aria-hidden="true"></i>
+                </a>
               </li>
             </ul>
           </div>
@@ -191,48 +207,59 @@
           <h2 class="projects__title" id="projects-title">Projects</h2>
         </div>
 
-        <!-- Project cards use buttons because they open modal windows. -->
-        <div class="projects__grid">
-          <button class="project-card" type="button" data-project-index="0" aria-haspopup="dialog">
-            <span class="project-card__thumbnail" aria-hidden="true">&lt;/&gt;</span>
-            <span class="project-card__content">
-              <span class="project-card__name">Project One</span>
-              <span class="project-card__description">A short description of what this project does.</span>
-              <span class="project-card__tags">
-                <span>HTML</span>
-                <span>CSS</span>
-                <span>JavaScript</span>
-              </span>
-              <span class="project-card__link">View Project &rarr;</span>
-            </span>
+        <!-- Horizontal scrollable project carousel keeps cards compact as more projects are added. -->
+        <div class="projects__carousel">
+          <button class="projects__arrow projects__arrow--left" type="button" aria-label="Scroll projects left">
+            <i class="fa-solid fa-chevron-left" aria-hidden="true"></i>
           </button>
 
-          <button class="project-card" type="button" data-project-index="1" aria-haspopup="dialog">
-            <span class="project-card__thumbnail" aria-hidden="true">&lt;/&gt;</span>
-            <span class="project-card__content">
-              <span class="project-card__name">Project Two</span>
-              <span class="project-card__description">A short description of what this project does.</span>
-              <span class="project-card__tags">
-                <span>Python</span>
-                <span>HTML</span>
-                <span>CSS</span>
+          <!-- Project cards use buttons because they open modal windows. -->
+          <div class="projects__track" id="projects-track">
+            <button class="project-card" type="button" data-project-index="0" aria-haspopup="dialog">
+              <span class="project-card__thumbnail" aria-hidden="true">&lt;/&gt;</span>
+              <span class="project-card__content">
+                <span class="project-card__name">Project One</span>
+                <span class="project-card__description">A short description of what this project does.</span>
+                <span class="project-card__tags">
+                  <span>HTML</span>
+                  <span>CSS</span>
+                  <span>JavaScript</span>
+                </span>
+                <span class="project-card__link">View Project &rarr;</span>
               </span>
-              <span class="project-card__link">View Project &rarr;</span>
-            </span>
-          </button>
+            </button>
 
-          <button class="project-card" type="button" data-project-index="2" aria-haspopup="dialog">
-            <span class="project-card__thumbnail" aria-hidden="true">&lt;/&gt;</span>
-            <span class="project-card__content">
-              <span class="project-card__name">Project Three</span>
-              <span class="project-card__description">A short description of what this project does.</span>
-              <span class="project-card__tags">
-                <span>HTML</span>
-                <span>CSS</span>
-                <span>JavaScript</span>
+            <button class="project-card" type="button" data-project-index="1" aria-haspopup="dialog">
+              <span class="project-card__thumbnail" aria-hidden="true">&lt;/&gt;</span>
+              <span class="project-card__content">
+                <span class="project-card__name">Project Two</span>
+                <span class="project-card__description">A short description of what this project does.</span>
+                <span class="project-card__tags">
+                  <span>Python</span>
+                  <span>HTML</span>
+                  <span>CSS</span>
+                </span>
+                <span class="project-card__link">View Project &rarr;</span>
               </span>
-              <span class="project-card__link">View Project &rarr;</span>
-            </span>
+            </button>
+
+            <button class="project-card" type="button" data-project-index="2" aria-haspopup="dialog">
+              <span class="project-card__thumbnail" aria-hidden="true">&lt;/&gt;</span>
+              <span class="project-card__content">
+                <span class="project-card__name">Project Three</span>
+                <span class="project-card__description">A short description of what this project does.</span>
+                <span class="project-card__tags">
+                  <span>HTML</span>
+                  <span>CSS</span>
+                  <span>JavaScript</span>
+                </span>
+                <span class="project-card__link">View Project &rarr;</span>
+              </span>
+            </button>
+          </div>
+
+          <button class="projects__arrow projects__arrow--right" type="button" aria-label="Scroll projects right">
+            <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
           </button>
         </div>
       </div>
@@ -246,6 +273,13 @@
         <button class="project-modal__close" type="button" data-modal-close aria-label="Close project details">x</button>
 
         <h2 class="project-modal__title" id="project-modal-title">Project Name</h2>
+
+        <!-- Project created date is populated by JavaScript when project data includes it. -->
+        <p class="project-modal__date" id="project-modal-date" hidden>
+          <span class="project-modal__date-label">Created</span>
+          <span class="project-modal__date-value" id="project-modal-date-value"></span>
+        </p>
+
         <p class="project-modal__overview" id="project-modal-overview">Project overview goes here.</p>
 
         <div class="project-modal__section">
@@ -277,19 +311,25 @@
         <!-- Contact cards make the main actions easy to scan and click. -->
         <div class="contact__cards">
           <a class="contact-card" href="mailto:cedrick.luna.work@gmail.com">
-            <span class="contact-card__icon" aria-hidden="true">@</span>
+            <span class="contact-card__icon" aria-hidden="true">
+              <i class="fa-solid fa-envelope" aria-hidden="true"></i>
+            </span>
             <span class="contact-card__label">Email</span>
             <span class="contact-card__value">cedrick.luna.work@gmail.com</span>
           </a>
 
           <a class="contact-card" href="https://www.linkedin.com/in/cedrick-luna-9236b8393/" target="_blank" rel="noopener noreferrer">
-            <span class="contact-card__icon" aria-hidden="true">in</span>
+            <span class="contact-card__icon" aria-hidden="true">
+              <i class="fa-brands fa-linkedin-in" aria-hidden="true"></i>
+            </span>
             <span class="contact-card__label">LinkedIn</span>
             <span class="contact-card__value">cedrick-luna-9236b8393</span>
           </a>
 
           <div class="contact-card" aria-label="Based in Sariaya, Quezon, Philippines">
-            <span class="contact-card__icon" aria-hidden="true">pin</span>
+            <span class="contact-card__icon" aria-hidden="true">
+              <i class="fa-solid fa-location-dot" aria-hidden="true"></i>
+            </span>
             <span class="contact-card__label">Based In</span>
             <span class="contact-card__value">Sariaya, Quezon, Philippines</span>
           </div>
@@ -312,10 +352,26 @@
       <p class="site-footer__copy">&copy; 2026 All Rights Reserved.</p>
 
       <ul class="site-footer__socials" aria-label="Footer social links">
-        <li><a href="https://www.linkedin.com/in/cedrick-luna-9236b8393/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn profile">in</a></li>
-        <li><a href="https://www.facebook.com/cedrick.luna.50" target="_blank" rel="noopener noreferrer" aria-label="Facebook profile">fb</a></li>
-        <li><a href="https://x.com/lunaced_" target="_blank" rel="noopener noreferrer" aria-label="X profile">x</a></li>
-        <li><a href="https://github.com/LunaCedrick/" target="_blank" rel="noopener noreferrer" aria-label="GitHub profile">gh</a></li>
+        <li>
+          <a href="https://www.linkedin.com/in/cedrick-luna-9236b8393/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn profile">
+            <i class="fa-brands fa-linkedin-in" aria-hidden="true"></i>
+          </a>
+        </li>
+        <li>
+          <a href="https://www.facebook.com/cedrick.luna.50" target="_blank" rel="noopener noreferrer" aria-label="Facebook profile">
+            <i class="fa-brands fa-facebook-f" aria-hidden="true"></i>
+          </a>
+        </li>
+        <li>
+          <a href="https://x.com/lunaced_" target="_blank" rel="noopener noreferrer" aria-label="X profile">
+            <i class="fa-brands fa-x-twitter" aria-hidden="true"></i>
+          </a>
+        </li>
+        <li>
+          <a href="https://github.com/LunaCedrick/" target="_blank" rel="noopener noreferrer" aria-label="GitHub profile">
+            <i class="fa-brands fa-github" aria-hidden="true"></i>
+          </a>
+        </li>
       </ul>
     </div>
   </footer>

@@ -21,9 +21,16 @@ It must feel human, confident, and hireable.
   - LinkedIn → https://www.linkedin.com/in/cedrick-luna-9236b8393/
   - Facebook → https://www.facebook.com/cedrick.luna.50
   - X/Twitter → https://x.com/lunaced_
-  - GitHub → placeholder link
+  - GitHub → https://github.com/LunaCedrick/
   - Email → cedrick.luna.work@gmail.com
   - Style: icons in #aaaaaa, hover turns #c0392b, smooth transition
+  - Use Font Awesome icons instead of text placeholders:
+    LinkedIn: fa-brands fa-linkedin-in
+    Facebook: fa-brands fa-facebook-f
+    X/Twitter: fa-brands fa-x-twitter
+    GitHub: fa-brands fa-github
+    Email: fa-solid fa-envelope
+  - Keep aria-label on each link and put aria-hidden="true" on each decorative <i> icon.
 
 ## Right Column
 

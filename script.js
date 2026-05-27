@@ -3,6 +3,7 @@ const projects = [
   {
     name: "Project One",
     description: "A short description of what this project does.",
+    date: "May 2026",
     features: ["Feature one", "Feature two", "Feature three"],
     tech: ["HTML", "CSS", "JavaScript"],
     liveLink: "#",
@@ -11,6 +12,7 @@ const projects = [
   {
     name: "Project Two",
     description: "A short description of what this project does.",
+    date: "May 2026",
     features: ["Feature one", "Feature two", "Feature three"],
     tech: ["Python", "HTML", "CSS"],
     liveLink: "#",
@@ -19,6 +21,7 @@ const projects = [
   {
     name: "Project Three",
     description: "A short description of what this project does.",
+    date: "May 2026",
     features: ["Feature one", "Feature two", "Feature three"],
     tech: ["HTML", "CSS", "JavaScript"],
     liveLink: "#",
@@ -30,12 +33,17 @@ const projects = [
 const projectCards = document.querySelectorAll(".project-card");
 const projectModal = document.querySelector("#project-modal");
 const modalTitle = document.querySelector("#project-modal-title");
+const modalDate = document.querySelector("#project-modal-date");
+const modalDateValue = document.querySelector("#project-modal-date-value");
 const modalOverview = document.querySelector("#project-modal-overview");
 const modalFeatures = document.querySelector("#project-modal-features");
 const modalTags = document.querySelector("#project-modal-tags");
 const modalLiveLink = document.querySelector("#project-modal-live");
 const modalCodeLink = document.querySelector("#project-modal-code");
 const modalCloseItems = document.querySelectorAll("[data-modal-close]");
+const projectsTrack = document.querySelector("#projects-track");
+const projectsArrowLeft = document.querySelector(".projects__arrow--left");
+const projectsArrowRight = document.querySelector(".projects__arrow--right");
 let lastFocusedElement = null;
 
 // Creates a small list item for modal features and tech tags.
@@ -51,6 +59,15 @@ function populateProjectModal(project) {
   modalOverview.textContent = project.description;
   modalLiveLink.href = project.liveLink;
   modalCodeLink.href = project.githubLink;
+
+  // Show the created date only when the selected project provides one.
+  if (project.date) {
+    modalDateValue.textContent = project.date;
+    modalDate.hidden = false;
+  } else {
+    modalDateValue.textContent = "";
+    modalDate.hidden = true;
+  }
 
   modalFeatures.replaceChildren(...project.features.map(createListItem));
   modalTags.replaceChildren(...project.tech.map(createListItem));
@@ -108,6 +125,29 @@ projectCards.forEach((card) => {
     openProjectModal(Number(card.dataset.projectIndex));
   });
 });
+
+// Horizontal carousel arrows scroll the project track by one card at a time.
+function scrollProjects(direction) {
+  const firstCard = projectsTrack.querySelector(".project-card");
+  const trackStyles = window.getComputedStyle(projectsTrack);
+  const trackGap = Number.parseFloat(trackStyles.columnGap) || 0;
+  const scrollAmount = firstCard.offsetWidth + trackGap;
+
+  projectsTrack.scrollBy({
+    left: direction * scrollAmount,
+    behavior: "smooth"
+  });
+}
+
+if (projectsTrack && projectsArrowLeft && projectsArrowRight) {
+  projectsArrowLeft.addEventListener("click", () => {
+    scrollProjects(-1);
+  });
+
+  projectsArrowRight.addEventListener("click", () => {
+    scrollProjects(1);
+  });
+}
 
 // Closes the modal from either the X button or backdrop.
 modalCloseItems.forEach((item) => {

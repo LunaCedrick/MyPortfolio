@@ -585,6 +585,11 @@ ul {
   transform: translateY(-3px);
 }
 
+/* Font Awesome social icons replace the earlier text placeholders. */
+.about__socials i {
+  font-size: 1rem;
+}
+
 .about__content {
   display: grid;
   align-content: start;
@@ -718,16 +723,57 @@ ul {
   text-transform: uppercase;
 }
 
-.projects__grid {
-  display: grid;
-  grid-template-columns: 1fr;
+.projects__carousel {
+  position: relative;
+}
+
+/* Scrollable project track keeps cards in one horizontal row. */
+.projects__track {
+  display: flex;
   gap: 20px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  scroll-snap-type: x proximity;
+  padding: 0 0 16px;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.projects__track::-webkit-scrollbar {
+  display: none;
+}
+
+.projects__arrow {
+  position: absolute;
+  top: 50%;
+  z-index: 10;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border: 1px solid var(--color-accent);
+  background: var(--color-bg-deep);
+  color: var(--color-accent);
+  cursor: pointer;
+  transform: translateY(-50%);
+  transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+
+.projects__arrow:hover,
+.projects__arrow:focus-visible {
+  background: var(--color-accent);
+  color: var(--color-text);
+  outline: none;
 }
 
 .project-card {
   display: grid;
   gap: 22px;
-  width: 100%;
+  width: min(82vw, 320px);
+  min-width: min(82vw, 320px);
+  flex-shrink: 0;
+  scroll-snap-align: start;
   border: 1px solid var(--color-border);
   border-radius: 4px;
   background: var(--color-bg-deep);
@@ -877,6 +923,28 @@ body.is-modal-open {
   font-weight: 400;
   line-height: 0.9;
   text-transform: uppercase;
+}
+
+.project-modal__date {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 14px;
+  margin-bottom: 16px;
+}
+
+.project-modal__date-label {
+  color: var(--color-accent);
+  font-size: 0.7rem;
+  font-weight: 900;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.project-modal__date-value {
+  color: var(--color-muted);
+  font-size: 0.85rem;
+  font-weight: 700;
 }
 
 .project-modal__overview {
@@ -1048,6 +1116,11 @@ body.is-modal-open {
   text-transform: uppercase;
 }
 
+/* Contact card icons use Font Awesome while keeping the existing card rhythm. */
+.contact-card__icon i {
+  font-size: 1.9rem;
+}
+
 .contact-card__label {
   color: var(--color-muted);
   font-size: 0.72rem;
@@ -1133,6 +1206,11 @@ body.is-modal-open {
 .site-footer__socials a:focus-visible {
   color: var(--color-accent);
   outline: none;
+}
+
+/* Footer icons stay compact so the footer remains clean and balanced. */
+.site-footer__socials i {
+  font-size: 0.95rem;
 }
 
 /* ==============================
@@ -1243,8 +1321,25 @@ body.is-modal-open {
     padding: 108px 0;
   }
 
-  .projects__grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+  .projects__track {
+    gap: 24px;
+  }
+
+  .project-card {
+    width: calc((100% - 48px) / 3);
+    min-width: calc((100% - 48px) / 3);
+  }
+
+  .projects__arrow {
+    display: flex;
+  }
+
+  .projects__arrow--left {
+    left: -22px;
+  }
+
+  .projects__arrow--right {
+    right: -22px;
   }
 
   .project-modal {

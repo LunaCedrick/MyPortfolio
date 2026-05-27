@@ -29,10 +29,16 @@ items and list what was changed."
 ### HTML Quality
 - [ ] Semantic tags used — header, nav, main, section,
       footer, article. No div where semantic tag fits.
+- [ ] Head links load in the correct order:
+      Google Fonts preconnect links, Google Fonts stylesheet,
+      Font Awesome stylesheet, favicon, then style.css
+- [ ] Favicon is present at assets/images/favicon.png and linked in the head
 - [ ] No inline styles anywhere in the HTML
 - [ ] No deprecated tags or attributes
 - [ ] All images have descriptive alt attributes
 - [ ] All links have meaningful text — no "click here"
+- [ ] Decorative Font Awesome <i> icons have aria-hidden="true"
+- [ ] Icon links keep meaningful aria-label text on the parent link
 - [ ] Buttons use <button>, links use <a> — never swapped
 - [ ] IDs are unique — no duplicate IDs on the page
 - [ ] Classes follow kebab-case naming only
