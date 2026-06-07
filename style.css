@@ -828,8 +828,12 @@ ul {
 
 .project-card__description {
   color: var(--color-muted);
+  display: -webkit-box;
   font-size: 0.95rem;
   line-height: 1.7;
+  overflow: hidden;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
 }
 
 .project-card__tags,

@@ -1,13 +1,19 @@
 // Placeholder project data for the modal cards.
 const projects = [
   {
-    name: "Project One",
-    description: "A short description of what this project does.",
-    date: "May 2026",
-    features: ["Feature one", "Feature two", "Feature three"],
-    tech: ["HTML", "CSS", "JavaScript"],
-    liveLink: "#",
-    githubLink: "#",
+    name: "Taskly",
+    description: "Taskly is a multi-project task manager where users sign in with Google and manage tasks across all their projects in real time. A dashboard-first design surfaces overdue, today, and upcoming tasks in one view, so there is no digging through projects. Tasks stay accessible offline and sync automatically when connectivity returns. Built with Firebase Auth, Firestore, and Cloud Messaging.",
+    cardDescription: "A real-time task manager with Firebase sync and offline support. Manage multiple projects and never miss a deadline.",
+    date: "In Development",
+    features: [
+      "Real-time cross-device sync",
+      "Dashboard aggregates all projects by urgency",
+      "Offline support with auto-sync on reconnect",
+      "Browser push notifications for overdue tasks"
+    ],
+    tech: ["HTML", "CSS", "Vanilla JavaScript", "Firebase Auth", "Firebase Firestore", "Firebase Cloud Messaging", "Vercel"],
+    liveLink: "",
+    githubLink: "",
     docsLink: ""
   },
   {
@@ -72,8 +78,23 @@ navLinks.forEach((link) => {
 function populateProjectModal(project) {
   modalTitle.textContent = project.name;
   modalOverview.textContent = project.description;
-  modalLiveLink.href = project.liveLink;
-  modalCodeLink.href = project.githubLink;
+
+  // Hide action buttons when a project does not provide that link yet.
+  if (project.liveLink) {
+    modalLiveLink.href = project.liveLink;
+    modalLiveLink.hidden = false;
+  } else {
+    modalLiveLink.href = "#";
+    modalLiveLink.hidden = true;
+  }
+
+  if (project.githubLink) {
+    modalCodeLink.href = project.githubLink;
+    modalCodeLink.hidden = false;
+  } else {
+    modalCodeLink.href = "#";
+    modalCodeLink.hidden = true;
+  }
 
   // Show the documentation button only when the project provides docs.
   if (project.docsLink) {
