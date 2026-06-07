@@ -1048,6 +1048,17 @@ body.is-modal-open {
   transform: translateY(-3px);
 }
 
+/* Modal actions stack cleanly on narrow phones when all project links are visible. */
+@media (max-width: 420px) {
+  .project-modal__actions {
+    display: grid;
+  }
+
+  .project-modal__button {
+    width: 100%;
+  }
+}
+
 @keyframes modal-in {
   from {
     opacity: 0;

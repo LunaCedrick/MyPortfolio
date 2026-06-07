@@ -49,6 +49,8 @@ Each card has:
   - Tech stack tags: small pill tags, #c0392b background
   - Live link button: "VIEW LIVE →" crimson red filled button
   - GitHub button: "VIEW CODE →" outlined crimson red button
+  - Documentation button: "VIEW DOCS →" outlined crimson red button, opens documentation PDF/link in a new tab
+  - Documentation button is optional and must be hidden when no docs link exists
 - Modal opens with subtle fade + scale animation
 - Click outside modal to close
 
@@ -61,6 +63,7 @@ Project 1:
   Tech: ["HTML", "CSS", "JavaScript"]
   Live Link: "#"
   GitHub: "#"
+  Docs Link: "#"
 
 Project 2:
   Name: "PROJECT TWO"
@@ -70,6 +73,7 @@ Project 2:
   Tech: ["Python", "HTML", "CSS"]
   Live Link: "#"
   GitHub: "#"
+  Docs Link: "#"
 
 Project 3:
   Name: "PROJECT THREE"
@@ -79,6 +83,7 @@ Project 3:
   Tech: ["HTML", "CSS", "JavaScript"]
   Live Link: "#"
   GitHub: "#"
+  Docs Link: "#"
 
 ## JavaScript Notes
 - Use vanilla JS for modal open/close
@@ -90,6 +95,8 @@ Project 3:
 - Scroll amount should match one card width plus the carousel gap
 - Add date to each project data object in "Month Year" format
 - Show the modal date field only when a project has a date; keep it hidden if no date exists
+- Add docsLink to each project data object when documentation exists
+- Show the modal docs button only when a project has a docsLink; keep it hidden if no docs link exists
 
 ## What to Ask Codex
 "Using my agents.md and skill-projects.md, build the 

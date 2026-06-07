@@ -7,7 +7,8 @@ const projects = [
     features: ["Feature one", "Feature two", "Feature three"],
     tech: ["HTML", "CSS", "JavaScript"],
     liveLink: "#",
-    githubLink: "#"
+    githubLink: "#",
+    docsLink: ""
   },
   {
     name: "Project Two",
@@ -16,7 +17,8 @@ const projects = [
     features: ["Feature one", "Feature two", "Feature three"],
     tech: ["Python", "HTML", "CSS"],
     liveLink: "#",
-    githubLink: "#"
+    githubLink: "#",
+    docsLink: ""
   },
   {
     name: "Project Three",
@@ -25,7 +27,8 @@ const projects = [
     features: ["Feature one", "Feature two", "Feature three"],
     tech: ["HTML", "CSS", "JavaScript"],
     liveLink: "#",
-    githubLink: "#"
+    githubLink: "#",
+    docsLink: ""
   }
 ];
 
@@ -42,6 +45,7 @@ const modalFeatures = document.querySelector("#project-modal-features");
 const modalTags = document.querySelector("#project-modal-tags");
 const modalLiveLink = document.querySelector("#project-modal-live");
 const modalCodeLink = document.querySelector("#project-modal-code");
+const modalDocsLink = document.querySelector("#project-modal-docs");
 const modalCloseItems = document.querySelectorAll("[data-modal-close]");
 const projectsTrack = document.querySelector("#projects-track");
 const projectsArrowLeft = document.querySelector(".projects__arrow--left");
@@ -70,6 +74,15 @@ function populateProjectModal(project) {
   modalOverview.textContent = project.description;
   modalLiveLink.href = project.liveLink;
   modalCodeLink.href = project.githubLink;
+
+  // Show the documentation button only when the project provides docs.
+  if (project.docsLink) {
+    modalDocsLink.href = project.docsLink;
+    modalDocsLink.hidden = false;
+  } else {
+    modalDocsLink.href = "#";
+    modalDocsLink.hidden = true;
+  }
 
   // Show the created date only when the selected project provides one.
   if (project.date) {
