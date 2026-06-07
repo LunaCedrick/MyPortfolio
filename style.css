@@ -739,7 +739,8 @@ ul {
   overflow-x: auto;
   scroll-behavior: smooth;
   scroll-snap-type: x proximity;
-  padding: 8px 0 24px;
+  padding: 16px 10px 52px;
+  margin: -16px -10px -28px;
   scrollbar-width: none;
   -ms-overflow-style: none;
 }
