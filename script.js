@@ -17,14 +17,26 @@ const projects = [
     docsLink: ""
   },
   {
-    name: "Project Two",
-    description: "A short description of what this project does.",
-    date: "May 2026",
-    features: ["Feature one", "Feature two", "Feature three"],
-    tech: ["Python", "HTML", "CSS"],
-    liveLink: "#",
-    githubLink: "#",
-    docsLink: ""
+    name: "Weather Dashboard",
+    description: "A living weather interface that transforms the entire experience around real-time weather data. Users can search any city, view live conditions and a 5-day forecast, toggle between Celsius and Fahrenheit instantly, and browse city suggestions as they type. The background shifts to match the current weather condition, creating an immersive sky-themed design with frosted glass cards for readability and polish.",
+    cardDescription: "An immersive weather app with live forecasts, city search suggestions, unit toggles, and weather-reactive sky backgrounds.",
+    date: "June 2026",
+    features: [
+      "Live weather search for any city with real-time API data",
+      "City autocomplete suggestions as the user types",
+      "Dynamic background that changes based on weather and time of day",
+      "5-day forecast with frosted glass UI and temperature unit toggle"
+    ],
+    tech: [
+      "HTML",
+      "CSS",
+      "Vanilla JavaScript",
+      "OpenWeatherMap API",
+      "Vercel"
+    ],
+    liveLink: "https://weather-dashboard-cl-builds.vercel.app",
+    githubLink: "https://github.com/LunaCedrick/WeatherDashboard",
+    docsLink: "https://github.com/LunaCedrick/WeatherDashboard/blob/main/README.md"
   },
   {
     name: "Project Three",
