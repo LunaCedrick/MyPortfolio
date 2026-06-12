@@ -14,7 +14,7 @@ const projects = [
     tech: ["HTML", "CSS", "Vanilla JavaScript", "Firebase Auth", "Firebase Firestore", "Firebase Cloud Messaging", "Vercel"],
     liveLink: "",
     githubLink: "https://github.com/LunaCedrick/Taskly",
-    docsLink: ""
+    docsLink: "https://github.com/LunaCedrick/Taskly/blob/main/README.md"
   },
   {
     name: "Weather Dashboard",
