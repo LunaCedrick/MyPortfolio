@@ -13,7 +13,7 @@ const projects = [
     ],
     tech: ["HTML", "CSS", "Vanilla JavaScript", "Firebase Auth", "Firebase Firestore", "Firebase Cloud Messaging", "Vercel"],
     liveLink: "",
-    githubLink: "",
+    githubLink: "https://github.com/LunaCedrick/Taskly",
     docsLink: ""
   },
   {
