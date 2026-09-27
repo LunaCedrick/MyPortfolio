@@ -39,13 +39,13 @@ const projects = [
     docsLink: "https://github.com/LunaCedrick/WeatherDashboard/blob/main/README.md"
   },
   {
-    name: "Project Three",
-    description: "A short description of what this project does.",
-    date: "May 2026",
-    features: ["Feature one", "Feature two", "Feature three"],
+    name: "Personal Portfolio",
+    description: "A responsive portfolio that brings together my background, selected projects, and contact details in one place. The site uses semantic HTML, a custom CSS design system, and lightweight JavaScript for the project carousel and detail dialogs.",
+    date: "June 2026",
+    features: ["Responsive layouts for mobile and desktop", "Project detail dialogs with keyboard support", "Accessible navigation and reduced-motion support"],
     tech: ["HTML", "CSS", "JavaScript"],
-    liveLink: "#",
-    githubLink: "#",
+    liveLink: "https://lunacedrick.github.io/MyPortfolio/",
+    githubLink: "https://github.com/LunaCedrick/MyPortfolio",
     docsLink: ""
   }
 ];
@@ -219,3 +219,19 @@ document.addEventListener("keydown", (event) => {
 
   trapModalFocus(event);
 });
+
+// Marks the section currently in view in the primary navigation.
+const sectionObserver = new IntersectionObserver((entries) => {
+  entries.forEach((entry) => {
+    if (!entry.isIntersecting) return;
+    navLinks.forEach((link) => {
+      if (link.hash === `#${entry.target.id}`) {
+        link.setAttribute("aria-current", "location");
+      } else {
+        link.removeAttribute("aria-current");
+      }
+    });
+  });
+}, { rootMargin: "-35% 0px -55% 0px" });
+
+document.querySelectorAll("main > section[id]").forEach((section) => sectionObserver.observe(section));

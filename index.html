@@ -47,6 +47,7 @@
 
 </head>
 <body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
   <!-- Fixed navigation for moving through the portfolio sections. -->
   <header class="site-header">
     <nav class="site-nav" aria-label="Primary navigation">
@@ -68,7 +69,7 @@
     </nav>
   </header>
 
-  <main>
+  <main id="main-content">
     <!-- Hero section: first impression and strongest visual statement. -->
     <section class="hero" id="home" aria-labelledby="hero-title">
       <div class="hero__overlay" aria-hidden="true"></div>
@@ -275,10 +276,12 @@
             </button>
 
             <button class="project-card" type="button" data-project-index="2" aria-haspopup="dialog">
-              <span class="project-card__thumbnail" aria-hidden="true">&lt;/&gt;</span>
+              <span class="project-card__thumbnail">
+                <img src="assets/images/portfolio-thumbnail.png" alt="Portfolio website preview">
+              </span>
               <span class="project-card__content">
-                <span class="project-card__name">Project Three</span>
-                <span class="project-card__description">A short description of what this project does.</span>
+                <span class="project-card__name">Personal Portfolio</span>
+                <span class="project-card__description">A responsive portfolio built to present my work, skills, and approach to software engineering.</span>
                 <span class="project-card__tags">
                   <span>HTML</span>
                   <span>CSS</span>
