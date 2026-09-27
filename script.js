@@ -2,6 +2,7 @@
 const projects = [
   {
     name: "Taskly",
+    image: "assets/images/taskly.png",
     description: "Taskly is a multi-project task manager where users sign in with Google and manage tasks across all their projects in real time. A dashboard-first design surfaces overdue, today, and upcoming tasks in one view, so there is no digging through projects. Tasks stay accessible offline and sync automatically when connectivity returns. Built with Firebase Auth, Firestore, and Cloud Messaging.",
     cardDescription: "A real-time task manager with Firebase sync and offline support. Manage multiple projects and never miss a deadline.",
     date: "In Development",
@@ -18,6 +19,7 @@ const projects = [
   },
   {
     name: "Weather Dashboard",
+    image: "assets/images/weatherDashboard.png",
     description: "A living weather interface that transforms the entire experience around real-time weather data. Users can search any city, view live conditions and a 5-day forecast, toggle between Celsius and Fahrenheit instantly, and browse city suggestions as they type. The background shifts to match the current weather condition, creating an immersive sky-themed design with frosted glass cards for readability and polish.",
     cardDescription: "An immersive weather app with live forecasts, city search suggestions, unit toggles, and weather-reactive sky backgrounds.",
     date: "June 2026",
@@ -40,6 +42,7 @@ const projects = [
   },
   {
     name: "Personal Portfolio",
+    image: "assets/images/portfolio-thumbnail.png",
     description: "A responsive portfolio that brings together my background, selected projects, and contact details in one place. The site uses semantic HTML, a custom CSS design system, and lightweight JavaScript for the project carousel and detail dialogs.",
     date: "June 2026",
     features: ["Responsive layouts for mobile and desktop", "Project detail dialogs with keyboard support", "Accessible navigation and reduced-motion support"],
@@ -59,6 +62,8 @@ const modalTitle = document.querySelector("#project-modal-title");
 const modalDate = document.querySelector("#project-modal-date");
 const modalDateValue = document.querySelector("#project-modal-date-value");
 const modalOverview = document.querySelector("#project-modal-overview");
+const modalImage = document.querySelector("#project-modal-image");
+const modalImageCaption = document.querySelector("#project-modal-image-caption");
 const modalFeatures = document.querySelector("#project-modal-features");
 const modalTags = document.querySelector("#project-modal-tags");
 const modalLiveLink = document.querySelector("#project-modal-live");
@@ -90,6 +95,9 @@ navLinks.forEach((link) => {
 function populateProjectModal(project) {
   modalTitle.textContent = project.name;
   modalOverview.textContent = project.description;
+  modalImage.src = project.image;
+  modalImage.alt = `${project.name} project preview`;
+  modalImageCaption.textContent = `${project.name} interface preview`;
 
   // Hide action buttons when a project does not provide that link yet.
   if (project.liveLink) {
@@ -235,3 +243,97 @@ const sectionObserver = new IntersectionObserver((entries) => {
 }, { rootMargin: "-35% 0px -55% 0px" });
 
 document.querySelectorAll("main > section[id]").forEach((section) => sectionObserver.observe(section));
+
+// Makes the floating navigation slightly denser after the hero leaves view.
+const siteHeader = document.querySelector(".site-header");
+const heroSection = document.querySelector(".hero");
+const navStateObserver = new IntersectionObserver(([entry]) => {
+  siteHeader.classList.toggle("is-scrolled", !entry.isIntersecting);
+}, { threshold: 0.08 });
+
+navStateObserver.observe(heroSection);
+
+// Adds scroll reveals only when the browser supports them and motion is allowed.
+function initScrollReveals() {
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+  const revealTargets = document.querySelectorAll(
+    ".about__header, .about__media, .about__name-block, .about__bio, .about__skills, .about__drivers, .projects__header, .project-card, .contact__header, .contact__cards, .contact__cta, .site-footer__inner"
+  );
+
+  if (reducedMotion.matches || !("IntersectionObserver" in window)) return;
+
+  revealTargets.forEach((target) => target.classList.add("reveal"));
+  document.documentElement.classList.add("has-reveals");
+
+  const revealObserver = new IntersectionObserver((entries, observer) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+      entry.target.classList.add("is-visible");
+      observer.unobserve(entry.target);
+    });
+  }, { threshold: 0.14, rootMargin: "0px 0px -35px 0px" });
+
+  revealTargets.forEach((target) => revealObserver.observe(target));
+}
+
+// Uses one animation frame to update the subtle hero and project pointer effects.
+function initPointerEffects() {
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+  const finePointer = window.matchMedia("(hover: hover) and (pointer: fine)");
+  const hero = document.querySelector(".hero");
+  const portrait = document.querySelector(".hero__photo-wrap");
+  const code = document.querySelector(".hero__code");
+  const cards = document.querySelectorAll(".project-card");
+
+  if (reducedMotion.matches || !finePointer.matches) return;
+
+  let frame = 0;
+  let pointerX = 0;
+  let pointerY = 0;
+
+  hero.addEventListener("pointermove", (event) => {
+    const bounds = hero.getBoundingClientRect();
+    pointerX = event.clientX - bounds.left;
+    pointerY = event.clientY - bounds.top;
+
+    if (frame) return;
+    frame = window.requestAnimationFrame(() => {
+      hero.style.setProperty("--pointer-x", `${pointerX}px`);
+      hero.style.setProperty("--pointer-y", `${pointerY}px`);
+      const normalizedX = (pointerX / bounds.width - 0.5) * 2;
+      const normalizedY = (pointerY / bounds.height - 0.5) * 2;
+      portrait.style.setProperty("--portrait-x", `${normalizedX * 5}px`);
+      portrait.style.setProperty("--portrait-y", `${normalizedY * 4}px`);
+      code.style.setProperty("--code-x", `${normalizedX * -7}px`);
+      code.style.setProperty("--code-y", `${normalizedY * -5}px`);
+      frame = 0;
+    });
+  }, { passive: true });
+
+  cards.forEach((card) => {
+    card.addEventListener("pointermove", (event) => {
+      const bounds = card.getBoundingClientRect();
+      const x = event.clientX - bounds.left;
+      const y = event.clientY - bounds.top;
+
+      if (frame) return;
+      frame = window.requestAnimationFrame(() => {
+        card.style.setProperty("--pointer-x", `${x}px`);
+        card.style.setProperty("--pointer-y", `${y}px`);
+        const rotateX = ((y / bounds.height) - 0.5) * -3;
+        const rotateY = ((x / bounds.width) - 0.5) * 3;
+        card.style.setProperty("--tilt-x", `${rotateX}deg`);
+        card.style.setProperty("--tilt-y", `${rotateY}deg`);
+        frame = 0;
+      });
+    }, { passive: true });
+
+    card.addEventListener("pointerleave", () => {
+      card.style.setProperty("--tilt-x", "0deg");
+      card.style.setProperty("--tilt-y", "0deg");
+    });
+  });
+}
+
+initScrollReveals();
+initPointerEffects();
