@@ -2758,7 +2758,8 @@ html {
 
 .project-card:hover,
 .project-card:focus-visible {
-  box-shadow: 0 16px 36px rgb(0 0 0 / 0.26);
+  border-color: rgb(var(--color-accent-rgb) / 0.72);
+  box-shadow: 0 16px 36px rgb(0 0 0 / 0.26), 0 0 32px rgb(var(--color-accent-rgb) / 0.3);
   transform: perspective(900px) rotateX(var(--tilt-x)) rotateY(var(--tilt-y));
 }
 
