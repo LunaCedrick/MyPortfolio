@@ -339,8 +339,27 @@ function initPointerEffects() {
   const portrait = document.querySelector(".hero__photo-wrap");
   const code = document.querySelector(".hero__code");
   const cards = document.querySelectorAll(".project-card");
+  const glowSections = document.querySelectorAll(".about, .projects, .contact");
 
   if (reducedMotion.matches || !finePointer.matches) return;
+
+  // A stationary pointer does not always emit pointerleave while anchor navigation scrolls.
+  // Hide the last pointer position during scrolling and resume when the pointer moves again.
+  let pointerGlowResetFrame = 0;
+  const clearPointerGlow = () => {
+    document.documentElement.classList.add("pointer-glow-paused");
+    glowSections.forEach((section) => {
+      section.style.removeProperty("--section-pointer-x");
+      section.style.removeProperty("--section-pointer-y");
+    });
+  };
+  window.addEventListener("scroll", () => {
+    if (pointerGlowResetFrame) window.cancelAnimationFrame(pointerGlowResetFrame);
+    pointerGlowResetFrame = window.requestAnimationFrame(clearPointerGlow);
+  }, { passive: true });
+  window.addEventListener("pointermove", () => {
+    document.documentElement.classList.remove("pointer-glow-paused");
+  }, { passive: true });
 
   let heroFrame = 0;
   let pointerClientX = 0;
@@ -374,6 +393,31 @@ function initPointerEffects() {
     portrait.style.setProperty("--portrait-y", "0px");
     code.style.setProperty("--code-x", "0px");
     code.style.setProperty("--code-y", "0px");
+  });
+
+  // Carries the same soft pointer light through the content sections.
+  glowSections.forEach((section) => {
+    let sectionFrame = 0;
+    let sectionClientX = 0;
+    let sectionClientY = 0;
+
+    section.addEventListener("pointermove", (event) => {
+      sectionClientX = event.clientX;
+      sectionClientY = event.clientY;
+
+      if (sectionFrame) return;
+      sectionFrame = window.requestAnimationFrame(() => {
+        const bounds = section.getBoundingClientRect();
+        section.style.setProperty("--section-pointer-x", `${sectionClientX - bounds.left}px`);
+        section.style.setProperty("--section-pointer-y", `${sectionClientY - bounds.top}px`);
+        sectionFrame = 0;
+      });
+    }, { passive: true });
+
+    section.addEventListener("pointerleave", () => {
+      section.style.removeProperty("--section-pointer-x");
+      section.style.removeProperty("--section-pointer-y");
+    });
   });
 
   cards.forEach((card) => {
