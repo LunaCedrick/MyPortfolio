@@ -55,7 +55,7 @@
       <a class="site-nav__logo" href="#home" aria-label="Cedrick Luna home">&lt;/&gt;</a>
 
       <!-- CSS-only mobile menu control. -->
-      <input class="site-nav__toggle" type="checkbox" id="nav-toggle" aria-label="Toggle navigation menu" aria-controls="primary-navigation-links">
+      <input class="site-nav__toggle" type="checkbox" id="nav-toggle" aria-label="Toggle navigation menu" aria-controls="primary-navigation-links" aria-expanded="false">
       <label class="site-nav__menu-button" for="nav-toggle" aria-hidden="true">
         <span></span>
         <span></span>
@@ -67,6 +67,7 @@
         <li><a href="#projects">Projects</a></li>
         <li><a href="#contact">Contact</a></li>
       </ul>
+      <span class="site-nav__indicator" aria-hidden="true"></span>
     </nav>
   </header>
 
@@ -81,8 +82,8 @@
           <p class="hero__label">Software Engineering</p>
 
           <h1 class="hero__title" id="hero-title">
-            <span>Building</span>
-            <span>Solutions.</span>
+            <span class="hero-title__line"><span class="hero-title__inner">Building</span></span>
+            <span class="hero-title__line"><span class="hero-title__inner">Solutions.</span></span>
           </h1>
 
           <p class="hero__subtitle">Code. Design. Innovate.</p>
@@ -253,6 +254,7 @@
                 <img src="assets/images/taskly.png" alt="" loading="lazy">
               </span>
               <span class="project-card__content">
+                <span class="project-card__meta"><span>01 / 03</span><span>In Development</span></span>
                 <span class="project-card__name">Taskly</span>
                 <span class="project-card__description">A real-time task manager with Firebase sync and offline support.</span>
                 <span class="project-card__tags">
@@ -269,6 +271,7 @@
                 <img src="assets/images/weatherDashboard.png" alt="" loading="lazy">
               </span>
               <span class="project-card__content">
+                <span class="project-card__meta"><span>02 / 03</span><span>Live</span></span>
                 <span class="project-card__name">Weather Dashboard</span>
                 <span class="project-card__description">An immersive weather app with live forecasts, city search suggestions, unit toggles, and weather-reactive sky backgrounds.</span>
                 <span class="project-card__tags">
@@ -286,6 +289,7 @@
                 <img src="assets/images/portfolio-thumbnail.png" alt="" loading="lazy">
               </span>
               <span class="project-card__content">
+                <span class="project-card__meta"><span>03 / 03</span><span>Live</span></span>
                 <span class="project-card__name">Personal Portfolio</span>
                 <span class="project-card__description">A responsive portfolio built to present my work, skills, and approach to software engineering.</span>
                 <span class="project-card__tags">
@@ -317,31 +321,31 @@
             <figcaption id="project-modal-image-caption">Taskly interface preview</figcaption>
           </figure>
           <div class="project-modal__content">
-        <h2 class="project-modal__title" id="project-modal-title">Project Name</h2>
+            <h2 class="project-modal__title" id="project-modal-title">Project Name</h2>
 
-        <!-- Project created date is populated by JavaScript when project data includes it. -->
-        <p class="project-modal__date" id="project-modal-date" hidden>
-          <span class="project-modal__date-label">Created</span>
-          <span class="project-modal__date-value" id="project-modal-date-value"></span>
-        </p>
+            <!-- Project created date is populated by JavaScript when project data includes it. -->
+            <p class="project-modal__date" id="project-modal-date" hidden>
+              <span class="project-modal__date-label">Created</span>
+              <span class="project-modal__date-value" id="project-modal-date-value"></span>
+            </p>
 
-        <p class="project-modal__overview" id="project-modal-overview">Project overview goes here.</p>
+            <p class="project-modal__overview" id="project-modal-overview">Project overview goes here.</p>
 
-        <div class="project-modal__section">
-          <h3>Features</h3>
-          <ul class="project-modal__features" id="project-modal-features"></ul>
-        </div>
+            <div class="project-modal__section">
+              <h3>Features</h3>
+              <ul class="project-modal__features" id="project-modal-features"></ul>
+            </div>
 
-        <div class="project-modal__section">
-          <h3>Tech Stack</h3>
-          <ul class="project-modal__tags" id="project-modal-tags"></ul>
-        </div>
+            <div class="project-modal__section">
+              <h3>Tech Stack</h3>
+              <ul class="project-modal__tags" id="project-modal-tags"></ul>
+            </div>
 
-        <div class="project-modal__actions">
-          <a class="project-modal__button project-modal__button--filled" id="project-modal-live" href="#" target="_blank" rel="noopener noreferrer">View Live &rarr;</a>
-          <a class="project-modal__button project-modal__button--outline" id="project-modal-code" href="#" target="_blank" rel="noopener noreferrer">View Code &rarr;</a>
-          <a class="project-modal__button project-modal__button--outline" id="project-modal-docs" href="#" target="_blank" rel="noopener noreferrer" hidden>View Docs &rarr;</a>
-        </div>
+            <div class="project-modal__actions">
+              <a class="project-modal__button project-modal__button--filled" id="project-modal-live" href="#" target="_blank" rel="noopener noreferrer">View Live &rarr;</a>
+              <a class="project-modal__button project-modal__button--outline" id="project-modal-code" href="#" target="_blank" rel="noopener noreferrer">View Code &rarr;</a>
+              <a class="project-modal__button project-modal__button--outline" id="project-modal-docs" href="#" target="_blank" rel="noopener noreferrer" hidden>View Docs &rarr;</a>
+            </div>
           </div>
         </div>
       </article>
@@ -385,7 +389,7 @@
 
         <!-- Call to action gives hiring managers one clear next step. -->
         <div class="contact__cta">
-          <h3>Open To Opportunities.</h3>
+          <h3>Open To <span>Opportunities.</span></h3>
           <p>Whether it's a full-time role, internship, or collaboration &mdash; I'm ready to bring value from day one.</p>
           <a class="contact__button" href="mailto:cedrick.luna.work@gmail.com">Send Me An Email</a>
         </div>

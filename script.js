@@ -56,6 +56,9 @@ const projects = [
 // Modal elements used by the project card interactions.
 const navToggle = document.querySelector("#nav-toggle");
 const navLinks = document.querySelectorAll(".site-nav__links a");
+const siteNav = document.querySelector(".site-nav");
+const navIndicator = document.querySelector(".site-nav__indicator");
+const navItems = document.querySelectorAll(".site-nav__logo, .site-nav__links a");
 const projectCards = document.querySelectorAll(".project-card");
 const projectModal = document.querySelector("#project-modal");
 const modalTitle = document.querySelector("#project-modal-title");
@@ -83,12 +86,49 @@ function createListItem(text) {
 }
 
 // Closes the mobile navigation after a section link is selected.
+function syncMobileMenuState() {
+  if (navToggle) {
+    navToggle.setAttribute("aria-expanded", String(navToggle.checked));
+  }
+}
+
+if (navToggle) {
+  navToggle.addEventListener("change", syncMobileMenuState);
+}
+
 navLinks.forEach((link) => {
   link.addEventListener("click", () => {
     if (navToggle) {
       navToggle.checked = false;
+      syncMobileMenuState();
     }
   });
+});
+
+// Moves the shared active dot beneath the selected desktop navigation item.
+function setActiveNavItem(sectionId) {
+  const activeItem = [...navItems].find((item) => item.hash === `#${sectionId}`);
+  if (!activeItem || !siteNav || !navIndicator) return;
+
+  navItems.forEach((item) => {
+    if (item === activeItem) {
+      item.setAttribute("aria-current", "location");
+    } else {
+      item.removeAttribute("aria-current");
+    }
+  });
+
+  const navBounds = siteNav.getBoundingClientRect();
+  const itemBounds = activeItem.getBoundingClientRect();
+  const scale = navBounds.width ? siteNav.clientWidth / navBounds.width : 1;
+  const center = (itemBounds.left + itemBounds.width / 2 - navBounds.left) * scale;
+  siteNav.style.setProperty("--nav-indicator-x", `${center}px`);
+}
+
+setActiveNavItem("home");
+window.addEventListener("resize", () => {
+  const activeItem = [...navItems].find((item) => item.hasAttribute("aria-current"));
+  if (activeItem) setActiveNavItem(activeItem.hash.slice(1));
 });
 
 // Fills the modal with the project that matches the selected card.
@@ -148,19 +188,35 @@ function openProjectModal(projectIndex) {
 
   lastFocusedElement = document.activeElement;
   populateProjectModal(project);
+  projectModal.classList.remove("is-closing");
+  projectModal.classList.remove("is-open");
   projectModal.hidden = false;
   document.body.classList.add("is-modal-open");
+  window.requestAnimationFrame(() => projectModal.classList.add("is-open"));
   projectModal.querySelector(".project-modal__close").focus();
 }
 
 // Closes the modal and returns focus to the card that opened it.
 function closeProjectModal() {
-  projectModal.hidden = true;
+  if (projectModal.hidden || projectModal.classList.contains("is-closing")) return;
+
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (reducedMotion) {
+    projectModal.hidden = true;
+    projectModal.classList.remove("is-open", "is-closing");
+    document.body.classList.remove("is-modal-open");
+    if (lastFocusedElement) lastFocusedElement.focus();
+    return;
+  }
+
+  projectModal.classList.add("is-closing");
   document.body.classList.remove("is-modal-open");
 
-  if (lastFocusedElement) {
-    lastFocusedElement.focus();
-  }
+  window.setTimeout(() => {
+    projectModal.hidden = true;
+    projectModal.classList.remove("is-open", "is-closing");
+    if (lastFocusedElement) lastFocusedElement.focus();
+  }, 220);
 }
 
 // Keeps Tab and Shift+Tab focus inside the open modal.
@@ -169,7 +225,7 @@ function trapModalFocus(event) {
     return;
   }
 
-  const focusableElements = projectModal.querySelectorAll("a[href], button:not([disabled])");
+  const focusableElements = projectModal.querySelectorAll("a[href]:not([hidden]), button:not([disabled]):not([hidden])");
   const firstElement = focusableElements[0];
   const lastElement = focusableElements[focusableElements.length - 1];
 
@@ -226,19 +282,18 @@ document.addEventListener("keydown", (event) => {
   }
 
   trapModalFocus(event);
+
+  if (event.key === "Escape" && navToggle?.checked) {
+    navToggle.checked = false;
+    syncMobileMenuState();
+  }
 });
 
 // Marks the section currently in view in the primary navigation.
 const sectionObserver = new IntersectionObserver((entries) => {
   entries.forEach((entry) => {
     if (!entry.isIntersecting) return;
-    navLinks.forEach((link) => {
-      if (link.hash === `#${entry.target.id}`) {
-        link.setAttribute("aria-current", "location");
-      } else {
-        link.removeAttribute("aria-current");
-      }
-    });
+    setActiveNavItem(entry.target.id);
   });
 }, { rootMargin: "-35% 0px -55% 0px" });
 
@@ -287,17 +342,19 @@ function initPointerEffects() {
 
   if (reducedMotion.matches || !finePointer.matches) return;
 
-  let frame = 0;
-  let pointerX = 0;
-  let pointerY = 0;
+  let heroFrame = 0;
+  let pointerClientX = 0;
+  let pointerClientY = 0;
 
   hero.addEventListener("pointermove", (event) => {
-    const bounds = hero.getBoundingClientRect();
-    pointerX = event.clientX - bounds.left;
-    pointerY = event.clientY - bounds.top;
+    pointerClientX = event.clientX;
+    pointerClientY = event.clientY;
 
-    if (frame) return;
-    frame = window.requestAnimationFrame(() => {
+    if (heroFrame) return;
+    heroFrame = window.requestAnimationFrame(() => {
+      const bounds = hero.getBoundingClientRect();
+      const pointerX = pointerClientX - bounds.left;
+      const pointerY = pointerClientY - bounds.top;
       hero.style.setProperty("--pointer-x", `${pointerX}px`);
       hero.style.setProperty("--pointer-y", `${pointerY}px`);
       const normalizedX = (pointerX / bounds.width - 0.5) * 2;
@@ -306,31 +363,48 @@ function initPointerEffects() {
       portrait.style.setProperty("--portrait-y", `${normalizedY * 4}px`);
       code.style.setProperty("--code-x", `${normalizedX * -7}px`);
       code.style.setProperty("--code-y", `${normalizedY * -5}px`);
-      frame = 0;
+      heroFrame = 0;
     });
   }, { passive: true });
 
-  cards.forEach((card) => {
-    card.addEventListener("pointermove", (event) => {
-      const bounds = card.getBoundingClientRect();
-      const x = event.clientX - bounds.left;
-      const y = event.clientY - bounds.top;
+  hero.addEventListener("pointerleave", () => {
+    hero.style.setProperty("--pointer-x", "72%");
+    hero.style.setProperty("--pointer-y", "34%");
+    portrait.style.setProperty("--portrait-x", "0px");
+    portrait.style.setProperty("--portrait-y", "0px");
+    code.style.setProperty("--code-x", "0px");
+    code.style.setProperty("--code-y", "0px");
+  });
 
-      if (frame) return;
-      frame = window.requestAnimationFrame(() => {
-        card.style.setProperty("--pointer-x", `${x}px`);
-        card.style.setProperty("--pointer-y", `${y}px`);
-        const rotateX = ((y / bounds.height) - 0.5) * -3;
-        const rotateY = ((x / bounds.width) - 0.5) * 3;
+  cards.forEach((card) => {
+    let cardFrame = 0;
+    let cardClientX = 0;
+    let cardClientY = 0;
+
+    card.addEventListener("pointermove", (event) => {
+      cardClientX = event.clientX;
+      cardClientY = event.clientY;
+
+      if (cardFrame) return;
+      cardFrame = window.requestAnimationFrame(() => {
+        const bounds = card.getBoundingClientRect();
+        const cardPointerX = cardClientX - bounds.left;
+        const cardPointerY = cardClientY - bounds.top;
+        card.style.setProperty("--pointer-x", `${cardPointerX}px`);
+        card.style.setProperty("--pointer-y", `${cardPointerY}px`);
+        const rotateX = ((cardPointerY / bounds.height) - 0.5) * -6;
+        const rotateY = ((cardPointerX / bounds.width) - 0.5) * 6;
         card.style.setProperty("--tilt-x", `${rotateX}deg`);
         card.style.setProperty("--tilt-y", `${rotateY}deg`);
-        frame = 0;
+        cardFrame = 0;
       });
     }, { passive: true });
 
     card.addEventListener("pointerleave", () => {
       card.style.setProperty("--tilt-x", "0deg");
       card.style.setProperty("--tilt-y", "0deg");
+      card.style.setProperty("--pointer-x", "50%");
+      card.style.setProperty("--pointer-y", "50%");
     });
   });
 }
